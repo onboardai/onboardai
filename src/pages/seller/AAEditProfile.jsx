@@ -167,8 +167,16 @@ const AAEditProfile = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-      if (!localStorage.getItem("accessToken")) navigate("/booraa");
-    });
+    if (!localStorage.getItem("accessToken")) navigate("/booraa");
+  });
+
+  useEffect(() => {
+    if (userInfo) {
+      if (!userInfo?.agencyInfo) {
+        navigate("/seller/create/");
+      }
+    }
+  }, [userInfo, navigate]);
 
   useEffect(() => {
     if (errorMessage) {

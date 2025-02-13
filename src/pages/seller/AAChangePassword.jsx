@@ -72,6 +72,14 @@ const AAChangePassword = () => {
     if (!localStorage.getItem("accessToken")) navigate("/booraa");
   });
 
+  useEffect(() => {
+      if (userInfo) {
+        if (!userInfo?.agencyInfo) {
+          navigate("/seller/create/");
+        }
+      }
+    }, [userInfo, navigate]);
+
   const handleChange = useCallback((e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }, []);

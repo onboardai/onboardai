@@ -113,6 +113,14 @@ const AAChat = () => {
     }
   }, [receiverMessage]);
 
+  useEffect(() => {
+    if (userInfo) {
+      if (!userInfo?.agencyInfo) {
+        navigate("/seller/create/");
+      }
+    }
+  }, [userInfo, navigate]);
+
   return (
     <>
       <div className="flex">

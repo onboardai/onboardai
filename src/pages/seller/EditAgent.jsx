@@ -26,8 +26,6 @@ const EditAgent = () => {
   );
   const { userInfo } = useSelector((state) => state.auth);
 
-  
-
   useEffect(() => {
     if (!agent || !userInfo) return; // Prevent accessing undefined properties
     if (agent.sellerId !== userInfo._id) {
@@ -182,15 +180,22 @@ const EditAgent = () => {
     e.preventDefault();
     const oj = {
       agentId: agentId,
-      userId: userInfo._id
-    }
+      userId: userInfo._id,
+    };
     dispatch(delete_agent(oj));
-    navigate("/seller/dashboard/agents")
+    navigate("/seller/dashboard/agents");
   };
 
   if (!localStorage.getItem("accessToken")) {
     navigate("/booraa");
   }
+  useEffect(() => {
+    if (userInfo) {
+      if (!userInfo?.agencyInfo) {
+        navigate("/seller/create/");
+      }
+    }
+  }, [userInfo, navigate]);
 
   return (
     <div className="px-2 lg:px-7 pt-5 pb-8">

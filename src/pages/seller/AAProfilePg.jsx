@@ -27,6 +27,14 @@ const AAProfilePg = () => {
     if (!localStorage.getItem("accessToken")) navigate("/booraa");
   }, [navigate]);
 
+  useEffect(() => {
+    if (userInfo) {
+      if (!userInfo?.agencyInfo) {
+        navigate("/seller/create/");
+      }
+    }
+  }, [userInfo, navigate]);
+
   if (!userInfo) {
     return (
       <div className="flex items-center justify-center h-screen bg-gray-100">

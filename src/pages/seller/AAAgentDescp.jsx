@@ -30,7 +30,7 @@ const AAAgentDescp = () => {
   useEffect(() => {
     if (userInfo) {
       if (!userInfo?.agencyInfo) {
-        navigate("/bo/create/");
+        navigate("/seller/create/");
       }
     }
   }, [userInfo, navigate]);

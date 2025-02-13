@@ -13,6 +13,7 @@ const SellerAgents = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { agents, totalAgent } = useSelector((state) => state.agent);
+  const { userInfo } = useSelector((state) => state.auth);
 
   const [isOpen, setIsOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -76,9 +77,19 @@ const SellerAgents = () => {
     },
   ];
 
-  if (!localStorage.getItem("accessToken")) {
-    navigate("/booraa");
-  }
+  useEffect(() => {
+    if (!localStorage.getItem("accessToken")) {
+      navigate("/booraa");
+    }
+  }, [navigate]);
+
+  useEffect(() => {
+    if (userInfo) {
+      if (!userInfo?.agencyInfo) {
+        navigate("/seller/create/");
+      }
+    }
+  }, [userInfo, navigate]);
 
   return (
     <div className="flex">

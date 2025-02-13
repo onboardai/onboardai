@@ -22,6 +22,20 @@ const AddAgent = () => {
   const { userInfo } = useSelector((state) => state.auth);
 
   useEffect(() => {
+    if (userInfo) {
+      if (!userInfo?.agencyInfo) {
+        navigate("/seller/create/");
+      }
+    }
+  }, [userInfo, navigate]);
+
+  useEffect(() => {
+      if (!localStorage.getItem("accessToken")) {
+          navigate("/booraa/");
+      }
+    }, [userInfo, navigate]);
+
+  useEffect(() => {
     dispatch(
       get_category({
         searchValue: "",
